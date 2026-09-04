@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f5ed" />
+    <meta name="description" content="xiaoao 小奥练习室：小学奥数15专题专项与综合练习，支持随机出题、即时解析与错题复习。" />
+    <title>xiaoao｜小奥练习室</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">π</span>
+        <span>xiaoao <small>小奥练习室</small></span>
+      </a>
+      <nav aria-label="页面导航">
+        <a href="#practice">开始练习</a>
+        <a href="#mistakes">错题本 <span id="navMistakeCount" class="count-pill">0</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">xiaoao · 新五年级 · 15 个专题</p>
+          <h1 id="hero-title">专项练透，<br /><em>综合会用。</em></h1>
+          <p class="hero-subtitle">覆盖暑期 14 讲与不定方程，既能逐个专题巩固，也能跨专题随机训练。</p>
+          <a class="primary-link" href="#practice">开始今天的练习 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="math-card card-a">14 + 1 专题</div>
+          <div class="math-card card-b">专项 × 综合</div>
+          <div class="mascot">✦</div>
+        </div>
+        <div class="stats-strip" aria-label="练习数据">
+          <div><strong id="statAttempts">0</strong><span>累计作答</span></div>
+          <div><strong id="statAccuracy">—</strong><span>正确率</span></div>
+          <div><strong id="statStreak">0</strong><span>连续答对</span></div>
+        </div>
+      </section>
+
+      <section id="practice" class="practice-section" aria-labelledby="practice-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-index">01 / 专项与综合</p>
+            <h2 id="practice-title">今天先解这一题</h2>
+          </div>
+          <div class="practice-switch" role="group" aria-label="选择练习方式">
+            <button class="switch-button active" data-practice-kind="topic">专项练习</button>
+            <button class="switch-button" data-practice-kind="mixed">综合练习</button>
+          </div>
+        </div>
+
+        <div class="practice-controls">
+          <label id="topicControl" class="control-block" for="topicSelect">
+            <span>选择专题</span>
+            <select id="topicSelect">
+              <optgroup label="秋季新增">
+                <option value="indeterminate">不定方程</option>
+              </optgroup>
+              <optgroup label="暑期 14 讲">
+                <option value="inclusion">容斥原理</option>
+                <option value="pigeonhole">抽屉原理</option>
+                <option value="combinatorics">排列组合</option>
+                <option value="sequences">数列与数表</option>
+                <option value="fractions">分数与繁分数</option>
+                <option value="estimation">比较与估算</option>
+                <option value="geometry_counting">几何计数</option>
+                <option value="number_shape">数形结合</option>
+                <option value="telescoping">裂项</option>
+                <option value="induction">通项归纳</option>
+                <option value="triangles">三角形中的模型</option>
+                <option value="polygons">正多边形与角</option>
+                <option value="remainders">整除、余数性质</option>
+                <option value="prime_factors">分解质因数的应用</option>
+              </optgroup>
+            </select>
+          </label>
+          <div id="strategyControl" class="control-block" hidden>
+            <span>抽题策略</span>
+            <div class="strategy-picker" role="group" aria-label="综合练习抽题策略">
+              <button class="strategy-button active" data-strategy="balanced">均衡随机</button>
+              <button class="strategy-button" data-strategy="weighted">错题加权</button>
+            </div>
+          </div>
+          <div id="difficultyControl" class="control-block difficulty-control">
+            <span>选择难度</span>
+            <div class="difficulty-picker" role="group" aria-label="选择题目难度">
+              <button class="difficulty-button active" data-difficulty="random">随机</button>
+              <button class="difficulty-button" data-difficulty="1" aria-label="1星简单题">1⭐</button>
+              <button class="difficulty-button" data-difficulty="2" aria-label="2星一般题">2⭐</button>
+              <button class="difficulty-button" data-difficulty="3" aria-label="3星较难题">3⭐</button>
+              <button class="difficulty-button" data-difficulty="4" aria-label="4星极难题">4⭐</button>
+              <button class="difficulty-button" data-difficulty="5" aria-label="5星竞赛压轴题">5⭐</button>
+            </div>
+          </div>
+          <p id="practiceSummary" class="practice-summary">正在练习：不定方程 · 随机难度</p>
+        </div>
+
+        <article class="problem-card" aria-live="polite">
+          <div class="problem-meta">
+            <div class="problem-labels">
+              <span id="problemType" class="problem-type">不定方程 · 自然数解</span>
+              <span id="problemDifficulty" class="difficulty-badge">2⭐ · 一般题</span>
+            </div>
+            <span id="problemNumber" class="problem-number">第 1 题</span>
+          </div>
+          <p id="problemContext" class="problem-context"></p>
+          <h3 id="problemText" class="problem-text"></h3>
+
+          <div id="hintBox" class="hint-box" hidden>
+            <span aria-hidden="true">💡</span>
+            <p id="hintText"></p>
+          </div>
+
+          <div class="answer-area">
+            <label for="answerInput">你的答案</label>
+            <div class="answer-row">
+              <input id="answerInput" type="text" inputmode="decimal" placeholder="填入数字或分数，如 3/4" autocomplete="off" />
+              <button id="submitAnswer" class="primary-button">检查答案</button>
+            </div>
+            <p id="feedback" class="feedback" aria-live="assertive"></p>
+          </div>
+
+          <div class="problem-actions">
+            <button id="showHint" class="text-button">给我一点提示</button>
+            <button id="showSolution" class="text-button">查看答案与解析</button>
+            <button id="nextProblem" class="next-button">换一道题 <span aria-hidden="true">↗</span></button>
+          </div>
+
+          <div id="solutionPanel" class="solution-panel" hidden>
+            <div class="solution-head">
+              <div>
+                <span>参考答案</span>
+                <strong id="solutionAnswer"></strong>
+              </div>
+              <button id="saveMistake" class="save-button">＋ 加入错题本</button>
+            </div>
+            <ol id="solutionSteps" class="solution-steps"></ol>
+          </div>
+        </article>
+      </section>
+
+      <section id="mistakes" class="mistakes-section" aria-labelledby="mistakes-title">
+        <div class="section-heading mistakes-heading">
+          <div>
+            <p class="section-index">02 / 错题复习</p>
+            <h2 id="mistakes-title">把不会的，变成会的</h2>
+          </div>
+          <button id="clearMistakes" class="text-button danger" hidden>清空错题</button>
+        </div>
+        <div id="emptyMistakes" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">✓</div>
+          <h3>错题本还是空的</h3>
+          <p>答错或主动收藏的题目会出现在这里，并保存在当前浏览器中。</p>
+        </div>
+        <div id="mistakeList" class="mistake-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>xiaoao · 小奥练习室</span>
+      <p>认真想过的每一道题，都算进步。</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
